@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Grade 3 Scope & Sequence · Voices</title>
+<title>Grade 3 Scope &amp; Sequence · Voices</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8cG9seWdvbiBwb2ludHM9IjUwLDEyIDk0LDM0IDUwLDU2IDYsMzQiIGZpbGw9IiM1QjFGOUUiLz4KICA8cGF0aCBkPSJNMjIsMzggTDIyLDU4IFE1MCw3MiA3OCw1OCBMNzgsMzggUTUwLDUwIDIyLDM4IFoiIGZpbGw9IiMzRDE0NzAiLz4KICA8cGF0aCBkPSJNMzAsMzYgUTUwLDQ4IDcwLDM2IiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIwLjU1Ii8+CiAgPGNpcmNsZSBjeD0iODAiIGN5PSIzOCIgcj0iNCIgZmlsbD0iIzdDQjM0MiIvPgogIDxwYXRoIGQ9Ik04MCwzOCBRODMsNTQgODAsNzAiIHN0cm9rZT0iIzJGNkY5RSIgc3Ryb2tlLXdpZHRoPSIyLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik04MCwzOCBRODYsNTQgODgsNzAiIHN0cm9rZT0iI0U1OEEyQSIgc3Ryb2tlLXdpZHRoPSIyLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik04MCwzOCBRODAsNTUgNzQsNzAiIHN0cm9rZT0iI0M2NEZBMCIgc3Ryb2tlLXdpZHRoPSIyLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,6 +24,8 @@
   --green-deep: #5C8A2E;
   --alert: #C1442D;
   --alert-bg: #FBE4DC;
+  --assess: #B9770E;
+  --assess-bg: #FBEBD0;
   --focus: #3D1470;
   --radius: 14px;
   /* light language-allocation tints, used everywhere content is color-coded */
@@ -81,6 +84,10 @@ h1, h2, h3, h4 { font-family: "Fraunces", serif; font-weight: 600; }
 .legend-title { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-soft); margin-bottom: 6px; font-weight: 700; }
 .legend-item { font-size: 13px; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .legend-swatch { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+
+.keydates-panel { min-width: 420px; max-width: 480px; max-height: 70vh; overflow-y: auto; }
+.keydates-panel .table-scroll { border: none; }
+.keydates-panel .overview-table { min-width: 0; }
 
 /* Filter bar - deliberately loud: its own colored strip, labeled controls,
    and a visible badge whenever a filter isn't set to "everything". */
@@ -162,6 +169,9 @@ main { padding: 20px; max-width: 1200px; margin: 0 auto; }
 }
 .overview-table tbody tr.unit-row { cursor: pointer; }
 .overview-table tbody tr.unit-row:hover td { background: var(--paper); }
+
+#week-content tr.week-lesson-row { cursor: pointer; }
+#week-content tr.week-lesson-row:hover td { background: var(--paper); }
 .cell-unit-label { font-weight: 700; font-size: 13px; }
 .cell-dates { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
 .cell-topic { font-weight: 600; margin-bottom: 4px; }
@@ -197,6 +207,7 @@ th { background: var(--paper); font-size: 11px; text-transform: uppercase; color
 
 .empty-note { padding: 16px; border: 1.5px dashed var(--line); border-radius: var(--radius); color: var(--ink-soft); font-size: 13px; background: var(--card); }
 footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 20px; }
+#last-updated:not(:empty)::before { content: " · "; }
 
 /* Calendar */
 .calendar-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
@@ -231,6 +242,8 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
   white-space: nowrap; flex-shrink: 0;
 }
 .lesson-chip:hover { outline: 2px solid var(--purple-deep); outline-offset: -1px; }
+.span-chip { align-self: center; display: flex; align-items: center; margin: 2px 0; }
+.gantt-track-span { align-items: start; }
 
 /* Curriculum Sites */
 .curricula-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
@@ -264,7 +277,6 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
 <script src="https://cdn.jsdelivr.net/npm/docx@9.7.1/dist/index.iife.js"></script>
 </head>
 <body>
-
 <header class="topbar">
   <div class="brand-row">
     <img src="https://voicesacademies.org/wp-content/uploads/2023/08/logo-new.png" alt="Voices College-Bound Language Academies" class="brand-logo" />
@@ -275,6 +287,14 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
   </div>
   <div class="header-actions">
     <a class="btn-submit" href="https://grow.leveldata.com/data-dash" target="_blank" rel="noopener">Submit Weekly Internalization ↗</a>
+    <details id="keydates-toggle" class="legend-toggle">
+      <summary>Key Dates</summary>
+      <div id="keydates-panel" class="legend-panel keydates-panel"></div>
+    </details>
+    <details id="assessments-toggle" class="legend-toggle">
+      <summary>Assessments</summary>
+      <div id="assessments-panel" class="legend-panel keydates-panel"></div>
+    </details>
     <details id="legend-toggle" class="legend-toggle">
       <summary>Legend</summary>
       <div id="legend-panel" class="legend-panel"></div>
@@ -305,32 +325,20 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
 </nav>
 
 <main>
-  <!-- OVERVIEW & CALENDAR (merged) -->
+  <!-- OVERVIEW & CALENDAR (Timeline only) -->
   <section id="tab-overview" class="tab-panel active">
-    <div class="view-toggle">
-      <button class="view-btn active" data-view="list">List</button>
-      <button class="view-btn" data-view="timeline">Timeline</button>
-    </div>
-
-    <div id="view-list" class="view-pane">
-      <p class="hint">Each subject's units, on its own timeline. Click any row for that unit's individual lessons. Want everything lined up together across subjects? Switch to Timeline.</p>
-      <div id="overview-content"></div>
-    </div>
-
-    <div id="view-timeline" class="view-pane" style="display:none">
-      <div class="calendar-toolbar">
-        <div class="zoom-group">
-          <button class="zoom-btn" data-zoom="year">Year</button>
-          <button class="zoom-btn" data-zoom="trimester">Trimester</button>
-          <button class="zoom-btn active" data-zoom="month">Month</button>
-          <button class="zoom-btn" data-zoom="week">Week</button>
-          <button class="zoom-btn" data-zoom="day">Day</button>
-        </div>
-        <div id="calendar-nav" class="calendar-nav"></div>
+    <div class="calendar-toolbar">
+      <div class="zoom-group">
+        <button class="zoom-btn" data-zoom="year">Year</button>
+        <button class="zoom-btn" data-zoom="trimester">Trimester</button>
+        <button class="zoom-btn active" data-zoom="month">Month</button>
+        <button class="zoom-btn" data-zoom="week">Week</button>
+        <button class="zoom-btn" data-zoom="day">Day</button>
       </div>
-      <p class="hint">Individual lessons, colored by language of instruction (see Legend). Click one for details.</p>
-      <div id="calendar-content"></div>
+      <div id="calendar-nav" class="calendar-nav"></div>
     </div>
+    <p class="hint">Units and individual lessons, colored by language of instruction (see Legend). Click any chip for details.</p>
+    <div id="calendar-content"></div>
   </section>
 
   <!-- Shared detail modal -->
@@ -360,11 +368,12 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
   </section>
 </main>
 
-<footer><span>Source: Network-wide Content Scope and Sequences 2026-27 — Grade 3</span></footer>
+<footer>
+  <span>Source: Network-wide Content Scope and Sequences 2026-27 — Grade 3</span>
+  <span id="last-updated"></span>
+</footer>
 
-
-<script type="application/json" id="grade3-data">
-{
+<script type="application/json" id="grade3-data">{
   "grade": "3rd",
   "sections_by_subject": {
     "Values Block": [
@@ -381,6 +390,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Weekly Plan",
+        "resources_url": "https://docs.google.com/document/d/1ZUGwwKE31_7rTbuacmTh7lIVhqUIzjaBTXjGsX406iQ/edit?tab=t.0",
         "start_date": "2026-08-10T00:00:00",
         "end_date": "2026-08-14T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Social Awareness; Relationship Skills",
@@ -476,6 +486,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Respect",
+        "resources_url": "https://docs.google.com/document/d/1ypIzcN1mzpldWU81zlncQui7qS-_Siptbuti2NiBoxg/edit?usp=drive_link",
         "start_date": "2026-09-14T00:00:00",
         "end_date": "2026-09-18T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Social Awareness; Relationship Skills",
@@ -533,6 +544,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Integrity 10/13",
+        "resources_url": "https://docs.google.com/document/d/14CX5BapWqiiQ5Ukfr7_MJBQRuGW2i9cZkP5U6OWbJgg/edit?tab=t.0",
         "start_date": "2026-10-05T00:00:00",
         "end_date": "2026-10-09T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Self-Awareness; Responsible Decision-Making",
@@ -571,6 +583,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Humility 9/25",
+        "resources_url": "https://docs.google.com/document/d/1RG1IREe-8sZGU6qIq6wEsAA5dus-D-E8KHa3GJkVqP0/edit?usp=drive_link",
         "start_date": "2026-10-19T00:00:00",
         "end_date": "2026-10-23T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Self-Awareness; Social Awareness",
@@ -590,6 +603,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Responsibility",
+        "resources_url": "https://docs.google.com/document/d/1_k8MlVdm3BigQIoMr4UaP_cZ_foBrMCmJMZiGTCa-Qs/edit?tab=t.0",
         "start_date": "2026-10-26T00:00:00",
         "end_date": "2026-10-30T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Responsible Decision-Making; Self-Management",
@@ -609,6 +623,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Stewardship 10/27",
+        "resources_url": "https://docs.google.com/document/d/1AXpo1qp4bWPqZxHDI1uKSesRSAnx58TgkuzH1vb13hs/edit?usp=drive_link",
         "start_date": "2026-11-02T00:00:00",
         "end_date": "2026-11-06T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Responsible Decision-Making; Social Awareness",
@@ -761,6 +776,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "https://collections.follettsoftware.com/collection/5d9f9344ff63580012cbf949?h=8a621178c0886c68a6c66f904f7a6194c2cd6f7c9a1aaf986e4267e458cd231b",
+        "resources_url": "https://collections.follettsoftware.com/collection/5d9f9344ff63580012cbf949?h=8a621178c0886c68a6c66f904f7a6194c2cd6f7c9a1aaf986e4267e458cd231b",
         "start_date": "2027-01-25T00:00:00",
         "end_date": "2027-01-29T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Social Awareness; Responsible Decision-Making",
@@ -780,6 +796,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Gratitude 11/24",
+        "resources_url": "https://docs.google.com/document/d/1sCiBsmw1qdbTdDsYVzlVJkWdTqIWoyiSbDAYowsbGp8/edit?usp=drive_link",
         "start_date": "2027-02-01T00:00:00",
         "end_date": "2027-02-05T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Self-Awareness; Social Awareness",
@@ -799,6 +816,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Empathy 11/17",
+        "resources_url": "https://docs.google.com/document/d/1azJ1s6Nbow87UhJoIeZfW-KtG2bWX-RdwhShxjw-WiM/edit?usp=drive_link",
         "start_date": "2027-02-08T00:00:00",
         "end_date": "2027-02-12T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Social Awareness",
@@ -818,6 +836,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Compassion 12/1",
+        "resources_url": "https://docs.google.com/document/d/1gXTCBfXQl3JxGiHUQdAsa4DXFqJ3NDClHky7JscDpsY/edit?usp=drive_link",
         "start_date": "2027-02-22T00:00:00",
         "end_date": "2027-02-26T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Social Awareness; Relationship Skills",
@@ -837,6 +856,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Acceptance 12/8",
+        "resources_url": "https://docs.google.com/document/d/1-9UxC4b1_4CiKsMplMKPL7RXAvmyxuG7R-iqvoI4ZSI/edit?usp=drive_link",
         "start_date": "2027-03-01T00:00:00",
         "end_date": "2027-03-05T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Self-Awareness; Social Awareness",
@@ -875,6 +895,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Generosity 12/15",
+        "resources_url": "https://docs.google.com/document/d/1GaVMV7NecZZBwEja0JkqiFRE2-I3JtObUM31fngY0W4/edit?usp=drive_link",
         "start_date": "2027-03-15T00:00:00",
         "end_date": "2027-03-19T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Social Awareness; Relationship Skills",
@@ -894,6 +915,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Perseverance 1/5",
+        "resources_url": "https://docs.google.com/document/d/1w5ATolRCDAN_auHlFqn1dlXMzfmrP3Tsq98lh8q6m3s/edit?usp=drive_link",
         "start_date": "2027-03-22T00:00:00",
         "end_date": "2027-03-26T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Self-Management",
@@ -913,6 +935,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Resilience 1/12",
+        "resources_url": "https://docs.google.com/document/d/1fAQTt7d7Fmj-dFUfloR1RJJtuJSM1YrgqIOb8xMSd-Y/edit?usp=drive_link",
         "start_date": "2027-03-29T00:00:00",
         "end_date": "2027-04-02T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Self-Awareness; Self-Management",
@@ -1008,6 +1031,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Honesty 2/2",
+        "resources_url": "https://docs.google.com/document/d/14ukhGCLqOAZ6ukHAVz9DU3YQmVoub6MrVX496tpRb6s/edit?usp=drive_link",
         "start_date": "2027-05-03T00:00:00",
         "end_date": "2027-05-07T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Self-Awareness; Responsible Decision-Making",
@@ -1046,6 +1070,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Sincerity 2/9",
+        "resources_url": "https://docs.google.com/document/d/1_whkQ3QRqRHEEw2PSI2qFMC2uNcDFfNP9C5CnrGl0co/edit?usp=drive_link",
         "start_date": "2027-05-17T00:00:00",
         "end_date": "2027-05-21T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Self-Awareness; Relationship Skills",
@@ -1065,6 +1090,7 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
         "lesson_objective": null,
         "language_objective": null,
         "resources": "Copy of Courage 4/20",
+        "resources_url": "https://docs.google.com/document/d/1b7AAmlmZ7bSxhkQ44R5L-DoDwWBONJI0kwUDEcPRiwM/edit?usp=drive_link",
         "start_date": "2027-05-24T00:00:00",
         "end_date": "2027-05-28T00:00:00",
         "focus_mastery_standards": "CASEL Standards (English | Spanish): Responsible Decision-Making; Self-Management",
@@ -11910,20 +11936,17 @@ footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 2
       "assessments": null
     }
   ]
-}
-</script>
+}</script>
 <script>
 /* Grade 3 Scope & Sequence Portal
  * --------------------------------
  * Tabs:
- *   1. Overview & Calendar - a view toggle over the same filtered data:
- *        - List:     each subject's units on its own simple table (not
- *                     forced into a shared row alignment - Math/ELA/SLA/
- *                     Science/Social Studies each run on their own
- *                     numbering in the source sheet).
- *        - Timeline: Year / Trimester / Month / Week / Day zoom, showing
- *                     individual lessons (not just unit-level blocks) on
- *                     an actual date axis across subjects.
+ *   1. Overview & Calendar - a single Timeline view (Year / Trimester /
+ *      Month / Week / Day zoom) on an actual date axis across subjects.
+ *      Each subject gets two rows: a "Units" row (whole unit spans,
+ *      clickable) and a "Lessons" row (individual lessons, clickable).
+ *      Subjects with no separate lesson tier (e.g. Values Block) just get
+ *      one row.
  *   2. Weekly Planning - pick a week, download a combined Internalization
  *      Document (.docx) covering every subject for that week, then submit
  *      it via the "Submit Weekly Internalization" button (opens the
@@ -11950,6 +11973,13 @@ const TRIMESTERS = [
 ];
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
+// Bump this to the current date/time every time data/3rd.json is
+// regenerated from the sheet (scripts/parse_3rd.py) - shown in the footer
+// (with time) so anyone viewing the portal knows how fresh the snapshot
+// is. Format: "YYYY-MM-DDTHH:MM" in whatever local time zone you're in
+// when you regenerate it (California/Pacific for this network).
+const LAST_UPDATED = "2026-07-21T15:41";
+
 // Language of instruction color coding (light purple / light green), used
 // everywhere: Overview headers, Calendar chips, This Week subject headers,
 // and the Legend. Deep variants are for dots/borders/text-on-white.
@@ -11974,16 +12004,27 @@ const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
 document.addEventListener("DOMContentLoaded", async () => {
   wireTabs();
-  wireViewToggle();
   const grade3 = JSON.parse(document.getElementById("grade3-data").textContent);
   state.dataByGrade = { "3rd": grade3 };
   computeFilterOptions();
   buildLegend();
   buildFilters();
   buildCurriculumSites();
+  renderLastUpdated();
   wireModal();
   renderAll();
 });
+
+function renderLastUpdated() {
+  const el = $("#last-updated");
+  if (!el) return;
+  // Full datetime (unlike toDate(), which truncates to midnight) so the
+  // time-of-day survives.
+  const d = new Date(LAST_UPDATED);
+  el.textContent = !isNaN(d)
+    ? `Last updated on ${d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })} at ${d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}`
+    : `Last updated on ${LAST_UPDATED}`;
+}
 
 function wireTabs() {
   $$(".tab-btn").forEach((btn) => {
@@ -11992,21 +12033,6 @@ function wireTabs() {
       $$(".tab-panel").forEach((p) => p.classList.remove("active"));
       btn.classList.add("active");
       $(`#tab-${btn.dataset.tab}`).classList.add("active");
-    });
-  });
-}
-
-// The Overview and Calendar tabs are merged into one tab with a List /
-// Timeline toggle - both panes are rendered on every data/filter change
-// (cheap enough at this data size), the toggle just shows/hides them.
-function wireViewToggle() {
-  $$(".view-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      $$(".view-btn").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      const view = btn.dataset.view;
-      $("#view-list").style.display = view === "list" ? "" : "none";
-      $("#view-timeline").style.display = view === "timeline" ? "" : "none";
     });
   });
 }
@@ -12043,17 +12069,22 @@ function computeFilterOptions() {
     [...Object.values(d.sections_by_subject).flat(), ...Object.values(d.lessons_by_subject).flat()].forEach((row) => {
       if (row.curriculum) curricula.add(row.curriculum);
     });
-    Object.entries(d.lessons_by_subject).forEach(([subj, arr]) => {
-      arr.forEach((l) => {
-        if (!l.language_of_instruction) return;
-        langCounts[subj] ??= {};
-        langCounts[subj][l.language_of_instruction] = (langCounts[subj][l.language_of_instruction] || 0) + 1;
+    // Count language of instruction from both lessons AND sections, since
+    // some subjects (e.g. Values Block) only have section-level rows with
+    // no separate lesson tier underneath them.
+    [d.lessons_by_subject, d.sections_by_subject].forEach((collection) => {
+      Object.entries(collection).forEach(([subj, arr]) => {
+        arr.forEach((row) => {
+          if (!row.language_of_instruction) return;
+          langCounts[subj] ??= {};
+          langCounts[subj][row.language_of_instruction] = (langCounts[subj][row.language_of_instruction] || 0) + 1;
+        });
       });
     });
   });
 
   state.allGrades = grades;
-  state.allSubjects = [...subjects].filter((s) => s !== "Values Block").sort();
+  state.allSubjects = [...subjects].sort();
   state.allCurricula = [...curricula].sort();
   state.filters.grades = new Set(grades);
   state.filters.subjects = new Set(state.allSubjects);
@@ -12172,13 +12203,19 @@ function buildLegend() {
       <div class="legend-item">🟡 Partial / second introduction</div>
       <div class="legend-item">🟢 Full introduction</div>
       <div class="legend-item">❎ Cross-linguistic transfer</div>
+    </div>
+    <div class="legend-group">
+      <div class="legend-title">Other Timeline rows</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--alert-bg);border:1px solid var(--alert)"></span>Network Key Dates</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--assess-bg);border:1px solid var(--assess)"></span>Assessments</div>
     </div>`;
 }
 
 // ---------- shared render entry point ----------
 
 function renderAll() {
-  renderOverview();
+  renderKeyDatesList();
+  renderAssessmentsList();
   renderCalendar();
   setupWeekTab();
 }
@@ -12209,54 +12246,18 @@ function lessonsFor(subj) {
   return all.filter((l) => !l.curriculum || state.filters.curricula.has(l.curriculum));
 }
 
-// ---------- Overview: one independent table per subject ----------
-
-function renderOverview() {
-  const host = $("#overview-content");
-  const subjects = visibleSubjects();
-  if (subjects.length === 0) {
-    host.innerHTML = `<div class="empty-note">No subjects match the current filters.</div>`;
-    return;
-  }
-  host.innerHTML = subjects.map((subj) => renderSubjectTable(subj)).join("");
-
-  $$(`.unit-row`).forEach((row) => {
-    row.addEventListener("click", () => openUnitModal(row.dataset.section, [row.dataset.subj]));
-  });
+// Subjects like "Values Block" have no separate lesson tier - each row in
+// sections_by_subject IS the schedulable item (a weekly SEL theme with its
+// own date range). Everywhere the Calendar/Weekly Planning tabs need
+// date-anchored items, use this instead of lessonsFor() so those subjects
+// show up too.
+function timelineItemsFor(subj) {
+  const d = currentGradeData();
+  const hasLessons = (d.lessons_by_subject[subj] || []).length > 0;
+  return hasLessons ? lessonsFor(subj) : sectionsFor(subj);
 }
 
-function renderSubjectTable(subj) {
-  const sections = sectionsFor(subj).slice()
-    .sort((a, b) => (parseFloat(a.section_number) || 0) - (parseFloat(b.section_number) || 0));
-  const lang = state.languageBySubject[subj];
-  const curricula = [...new Set(sections.map((s) => s.curriculum).filter(Boolean))];
-
-  const body = sections.length === 0
-    ? `<div class="empty-note">No units match the current filters for ${escapeHtml(subj)}.</div>`
-    : `<div class="table-scroll"><table class="overview-table">
-        <thead><tr><th style="width:110px">Unit</th><th>Topic</th><th>Standards</th></tr></thead>
-        <tbody>${sections.map((sec) => `
-          <tr class="unit-row" data-section="${escapeHtml(sec.section_number)}" data-subj="${escapeHtml(subj)}">
-            <td class="col-label">
-              <div class="cell-unit-label">Unit ${escapeHtml(sec.section_number)}</div>
-              <div class="cell-dates">${formatDateRange(sec.start_date, sec.end_date)}</div>
-            </td>
-            <td><div class="cell-topic">${escapeHtml(sec.topic || "")}</div></td>
-            <td><div class="cell-standards">${escapeHtml(sec.focus_mastery_standards || "")}</div></td>
-          </tr>`).join("")}</tbody>
-      </table></div>`;
-
-  return `<div class="subject-section">
-    <div class="subject-section-header">
-      <span class="lang-dot" style="background:${languageColorDeep(subj)}"></span>
-      <h3>${escapeHtml(subj)}</h3>
-      <span class="subject-meta">${escapeHtml(lang)}${curricula.length ? " · " + escapeHtml(curricula.join(", ")) : ""}</span>
-    </div>
-    ${body}
-  </div>`;
-}
-
-// ---------- unit / lesson detail modal (shared by Overview + Calendar) ----------
+// ---------- unit / lesson detail modal (shared by Timeline) ----------
 
 function wireModal() {
   $("#modal-close").addEventListener("click", closeUnitModal);
@@ -12265,12 +12266,29 @@ function wireModal() {
   });
 }
 
+// A "Resources" cell in the sheet is often hyperlinked text (e.g. "Copy of
+// Integrity 10/13" linking out to a Google Doc) rather than a visible URL -
+// resources_url (captured separately by the parser, see parse_3rd.py) holds
+// that link. Falls back to treating the resources text itself as the link
+// if it's already a bare URL, otherwise just shows it as plain text.
+function resourceLinkHtml(item) {
+  if (!item || !item.resources) return "";
+  const url = item.resources_url || (/^https?:\/\//i.test(item.resources) ? item.resources : null);
+  const label = escapeHtml(item.resources);
+  const value = url
+    ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${label} ↗</a>`
+    : label;
+  return `<div style="margin-top:6px"><b>Resources:</b> ${value}</div>`;
+}
+
 function openUnitModal(sectionNum, subjects) {
   const body = $("#modal-body");
+  let titleSec = null;
   const blocks = subjects.filter(isSubjectVisible).map((subj) => {
-    const sec = sectionsFor(subj).find((s) => s.section_number === sectionNum);
+    const sec = sectionsFor(subj).find((s) => String(s.section_number || s._row) === sectionNum);
+    if (sec && !titleSec) titleSec = sec;
     const lessons = lessonsFor(subj)
-      .filter((l) => l.section_number === sectionNum)
+      .filter((l) => l.section_number && l.section_number === sectionNum)
       .sort((a, b) => (a.start_date || "").localeCompare(b.start_date || ""));
     if (!sec && lessons.length === 0) return "";
     const lessonRows = lessons.map((l) => `
@@ -12278,14 +12296,21 @@ function openUnitModal(sectionNum, subjects) {
         <div><b>${escapeHtml(l.lesson_number || "")}</b> — ${escapeHtml(l.topic || "")}</div>
         <div class="lesson-meta">${formatDate(l.start_date)}</div>
         ${l.lesson_objective ? `<div>${escapeHtml(l.lesson_objective)}</div>` : ""}
+        ${resourceLinkHtml(l)}
       </div>`).join("");
     return `<div class="subject-block">
       <h4 style="color:${languageColorDeep(subj)}">${escapeHtml(subj)}${sec ? " — " + escapeHtml(sec.topic || "") : ""}</h4>
       ${sec && sec.focus_mastery_standards ? `<div style="font-size:12px;color:var(--ink-soft);margin-bottom:8px;white-space:pre-wrap">${escapeHtml(sec.focus_mastery_standards)}</div>` : ""}
+      ${sec ? resourceLinkHtml(sec) : ""}
       ${lessonRows || `<div class="empty-note">No individual lessons logged for this subject/unit.</div>`}
     </div>`;
   }).join("");
-  body.innerHTML = `<h2>Section ${escapeHtml(sectionNum)}</h2>${blocks || `<div class="empty-note">Nothing matches the current filters.</div>`}`;
+  const title = titleSec && titleSec.section_number
+    ? `Section ${escapeHtml(sectionNum)}`
+    : titleSec
+      ? escapeHtml(formatDateRange(titleSec.start_date, titleSec.end_date))
+      : `Section ${escapeHtml(sectionNum)}`;
+  body.innerHTML = `<h2>${title}</h2>${blocks || `<div class="empty-note">Nothing matches the current filters.</div>`}`;
   $("#unit-modal").classList.remove("hidden");
 }
 
@@ -12295,10 +12320,11 @@ function openLessonModal(lesson, subj) {
     <h2>${escapeHtml(subj)} — ${escapeHtml(formatDate(lesson.start_date))}</h2>
     <div class="subject-block">
       <div class="lesson-row" style="border-left-color:${languageColorDeep(subj)}">
-        <div><b>Lesson ${escapeHtml(lesson.lesson_number || "")}</b>${lesson.topic ? " — " + escapeHtml(lesson.topic) : ""}</div>
+        <div><b>${lesson.lesson_number ? "Lesson " + escapeHtml(lesson.lesson_number) : escapeHtml(subj)}</b>${lesson.topic ? " — " + escapeHtml(lesson.topic) : ""}</div>
         ${lesson.lesson_objective ? `<div style="margin-top:6px"><b>Objective:</b> ${escapeHtml(lesson.lesson_objective)}</div>` : ""}
         ${lesson.language_objective ? `<div style="margin-top:6px"><b>Language Objective:</b> ${escapeHtml(lesson.language_objective)}</div>` : ""}
         ${lesson.focus_mastery_standards ? `<div style="margin-top:6px;white-space:pre-wrap"><b>Standards:</b> ${escapeHtml(lesson.focus_mastery_standards)}</div>` : ""}
+        ${resourceLinkHtml(lesson)}
       </div>
     </div>`;
   $("#unit-modal").classList.remove("hidden");
@@ -12406,7 +12432,7 @@ function formatWeekLabel(weekIndex) {
 function allWeeksWithData() {
   const weeks = new Set();
   visibleSubjects().forEach((subj) => {
-    lessonsFor(subj).forEach((l) => {
+    timelineItemsFor(subj).forEach((l) => {
       const w = weekIndexForDate(l.start_date);
       if (w !== null) weeks.add(w);
     });
@@ -12455,11 +12481,62 @@ function allPossibleWeeksInRange(start, end) {
   return buckets;
 }
 
-// Every zoom level (Year/Trimester/Month/Week) shows individual lessons -
-// one chip per lesson, grouped into whichever time bucket it falls in. A
-// bucket that ends up with many lessons (common at Year zoom, where a
-// bucket is a whole month) scrolls internally rather than blowing up the
-// row height - see .gantt-cell in style.css.
+// ---------- span-row helpers ----------
+// Multi-day items (units, Values Block weeks, key dates) should render as
+// ONE bar spanning every bucket column they overlap, not a duplicate chip
+// repeated in each bucket. bucketRangeForItem finds that column span;
+// packLanes stacks items that overlap in time into separate lanes (rows)
+// within the same track so nothing gets clipped.
+
+function bucketRangeForItem(buckets, startDate, endDate) {
+  const s = toDate(startDate);
+  if (!s) return null;
+  const e = toDate(endDate) || s;
+  let startIdx = -1, endIdx = -1;
+  buckets.forEach((b, i) => {
+    if (e >= b.start && s <= b.end) {
+      if (startIdx === -1) startIdx = i;
+      endIdx = i;
+    }
+  });
+  return startIdx === -1 ? null : { startIdx, endIdx };
+}
+
+function packLanes(rangedItems) {
+  const sorted = rangedItems.slice().sort((a, b) => a.startIdx - b.startIdx || a.endIdx - b.endIdx);
+  const laneEnds = []; // laneEnds[i] = last endIdx occupied in lane i
+  const placed = sorted.map((it) => {
+    let lane = laneEnds.findIndex((endIdx) => endIdx < it.startIdx);
+    if (lane === -1) { lane = laneEnds.length; laneEnds.push(it.endIdx); }
+    else { laneEnds[lane] = it.endIdx; }
+    return { ...it, lane };
+  });
+  return { placed, laneCount: laneEnds.length || 1 };
+}
+
+// Renders one gantt-row whose items are drawn as spanning bars (grid-column
+// covers every overlapping bucket) rather than one-chip-per-bucket.
+function renderSpanRow(rowLabelHtml, borderColor, items, buckets, chipHtmlFn) {
+  const ranged = items
+    .map((item) => {
+      const range = bucketRangeForItem(buckets, item.start_date, item.end_date);
+      return range ? { ...range, item } : null;
+    })
+    .filter(Boolean);
+  if (ranged.length === 0) return "";
+
+  const { placed, laneCount } = packLanes(ranged);
+  const laneHeight = 30;
+  const chips = placed.map(({ startIdx, endIdx, lane, item }) =>
+    chipHtmlFn(item, startIdx, endIdx, lane)
+  ).join("");
+
+  return `<div class="gantt-row">
+    <div class="gantt-row-label" style="border-left:4px solid ${borderColor}">${rowLabelHtml}</div>
+    <div class="gantt-track gantt-track-span" style="grid-template-columns: repeat(${buckets.length}, minmax(110px, 1fr)); grid-template-rows: repeat(${laneCount}, ${laneHeight}px); min-height:${laneCount * laneHeight + 8}px">${chips}</div>
+  </div>`;
+}
+
 function renderGantt() {
   const host = $("#calendar-content");
   const { buckets } = currentWindow();
@@ -12471,7 +12548,21 @@ function renderGantt() {
 
   const colHeaders = buckets.map((b) => `<div class="gantt-col-header">${escapeHtml(b.label)}</div>`).join("");
   const rows = subjects.map((subj) => {
-    const lessons = lessonsFor(subj);
+    const hasSeparateLessons = (currentGradeData().lessons_by_subject[subj] || []).length > 0;
+
+    if (!hasSeparateLessons) {
+      // e.g. Values Block: each row IS a span item (a week-long theme) -
+      // render the whole subject as one spanning-bar row.
+      const items = timelineItemsFor(subj).filter((l) => l.start_date);
+      return renderSpanRow(escapeHtml(subj), languageColorDeep(subj), items, buckets, (l, startIdx, endIdx, lane) => `
+        <div class="lesson-chip span-chip" style="grid-column:${startIdx + 1} / ${endIdx + 2}; grid-row:${lane + 1}; background:${languageColor(subj)}"
+          data-row="${l._row}" data-subj="${escapeHtml(subj)}"
+          title="${escapeHtml(l.lesson_number || "")} ${escapeHtml(l.topic || l.lesson_objective || "")}">${escapeHtml(l.lesson_number || "")} ${escapeHtml(l.topic || "")}</div>`);
+    }
+
+    const unitsRow = renderUnitsGanttRow(subj, buckets);
+
+    const lessons = timelineItemsFor(subj);
     const cells = buckets.map((b) => {
       const inBucket = lessons.filter((l) => {
         const d = toDate(l.start_date);
@@ -12482,11 +12573,15 @@ function renderGantt() {
         title="${escapeHtml(l.lesson_number || "")} ${escapeHtml(l.topic || l.lesson_objective || "")}">${escapeHtml(l.lesson_number || "")} ${escapeHtml(l.topic || "")}</div>`).join("");
       return `<div class="gantt-cell">${chips}</div>`;
     }).join("");
-    return `<div class="gantt-row">
-      <div class="gantt-row-label" style="border-left:4px solid ${languageColorDeep(subj)}">${escapeHtml(subj)}</div>
+    const rowLabel = `${escapeHtml(subj)} <span style="opacity:.6;font-weight:400;font-size:11px">· Lessons</span>`;
+    return unitsRow + `<div class="gantt-row">
+      <div class="gantt-row-label" style="border-left:4px solid ${languageColorDeep(subj)}">${rowLabel}</div>
       <div class="gantt-track" style="grid-template-columns: repeat(${buckets.length}, minmax(110px, 1fr))">${cells}</div>
     </div>`;
   }).join("");
+
+  const keyDateRow = renderKeyDatesGanttRow(buckets);
+  const assessmentRow = renderAssessmentsGanttRow(buckets);
 
   host.innerHTML = `
     <div class="gantt-wrap">
@@ -12494,16 +12589,155 @@ function renderGantt() {
         <div class="gantt-row-label"></div>
         <div class="gantt-track" style="grid-template-columns: repeat(${buckets.length}, minmax(110px, 1fr))">${colHeaders}</div>
       </div>
+      ${keyDateRow}
+      ${assessmentRow}
       ${rows}
     </div>`;
 
+  $$(".unit-chip").forEach((chip) => {
+    chip.addEventListener("click", () => openUnitModal(chip.dataset.section, [chip.dataset.subj]));
+  });
   $$(".lesson-chip").forEach((chip) => {
     chip.addEventListener("click", () => {
       const subj = chip.dataset.subj;
-      const lesson = lessonsFor(subj).find((l) => String(l._row) === chip.dataset.row);
+      const lesson = timelineItemsFor(subj).find((l) => String(l._row) === chip.dataset.row);
       if (lesson) openLessonModal(lesson, subj);
     });
   });
+  $$(".keydate-chip").forEach((chip) => {
+    chip.addEventListener("click", () => openKeyDateModal(chip.dataset.row));
+  });
+  $$(".assessment-chip").forEach((chip) => {
+    chip.addEventListener("click", () => openAssessmentModal(chip.dataset.row));
+  });
+}
+
+// ---------- Units row (whole-unit spans, clickable, shown above each
+// subject's Lessons row on the Timeline) ----------
+
+function renderUnitsGanttRow(subj, buckets) {
+  const sections = sectionsFor(subj).filter((s) => s.start_date);
+  const label = `${escapeHtml(subj)} <span style="opacity:.6;font-weight:400;font-size:11px">· Units</span>`;
+  return renderSpanRow(label, languageColorDeep(subj), sections, buckets, (s, startIdx, endIdx, lane) => {
+    const unitLabel = s.section_number ? `Unit ${s.section_number}` : "";
+    return `<div class="lesson-chip unit-chip span-chip" style="grid-column:${startIdx + 1} / ${endIdx + 2}; grid-row:${lane + 1}; background:transparent;border:1.5px solid ${languageColorDeep(subj)};color:${languageColorDeep(subj)};font-weight:600"
+      data-section="${escapeHtml(s.section_number || s._row)}" data-subj="${escapeHtml(subj)}"
+      title="${escapeHtml(unitLabel)} ${escapeHtml(s.topic || "")}">${escapeHtml(unitLabel)} ${escapeHtml(s.topic || "")}</div>`;
+  });
+}
+
+// ---------- Network Key Dates ----------
+// Parsed alongside lessons (holidays, PD days, minimum days, conference
+// windows, trimester boundaries) but shown separately since they apply
+// network-wide, not per subject.
+
+function allKeyDates() {
+  return currentGradeData().key_dates || [];
+}
+
+function renderKeyDatesGanttRow(buckets) {
+  const dates = allKeyDates();
+  return renderSpanRow("Key Dates", "var(--alert)", dates, buckets, (k, startIdx, endIdx, lane) => `
+    <div class="lesson-chip keydate-chip span-chip" style="grid-column:${startIdx + 1} / ${endIdx + 2}; grid-row:${lane + 1}; background:var(--alert-bg);color:var(--alert)"
+      data-row="${k._row}" title="${escapeHtml(k.topic || "")}">${escapeHtml(k.topic || "")}</div>`);
+}
+
+function keyDatesForDay(day) {
+  return allKeyDates().filter((k) => {
+    const start = (k.start_date || "").slice(0, 10);
+    const end = (k.end_date || start).slice(0, 10);
+    return day >= start && day <= end;
+  });
+}
+
+function openKeyDateModal(row) {
+  const k = allKeyDates().find((k2) => String(k2._row) === row);
+  if (!k) return;
+  const body = $("#modal-body");
+  body.innerHTML = `<h2>Network Key Date</h2>
+    <div class="subject-block">
+      <div class="lesson-row" style="border-left-color:var(--alert)">
+        <div><b>${escapeHtml(k.topic || "")}</b></div>
+        <div class="lesson-meta">${formatDateRange(k.start_date, k.end_date)}</div>
+        <div style="margin-top:6px;color:var(--ink-soft)">Applies to grade levels: ${escapeHtml(k.grade_level || "All")}</div>
+      </div>
+    </div>`;
+  $("#unit-modal").classList.remove("hidden");
+}
+
+function renderKeyDatesList() {
+  const el = $("#keydates-panel");
+  if (!el) return;
+  const dates = allKeyDates().slice().sort((a, b) => (a.start_date || "").localeCompare(b.start_date || ""));
+  if (dates.length === 0) { el.innerHTML = `<div class="empty-note">No key dates match the current filters.</div>`; return; }
+  el.innerHTML = `
+    <div class="legend-title">Holidays, PD days, minimum days, conferences, trimester boundaries</div>
+    <div class="table-scroll"><table class="overview-table">
+      <thead><tr><th style="width:150px">Date(s)</th><th>Event</th></tr></thead>
+      <tbody>${dates.map((k) => `
+        <tr>
+          <td class="col-label"><div class="cell-unit-label">${formatDateRange(k.start_date, k.end_date)}</div></td>
+          <td><div class="cell-topic">${escapeHtml(k.topic || "")}</div></td>
+        </tr>`).join("")}</tbody>
+    </table></div>`;
+}
+
+// ---------- Assessments ----------
+// Diagnostics/benchmarks/summative windows (ELPAC, IXL Math Diagnostic,
+// STAR Reading, CAST, SBAC, etc.) - parsed alongside lessons but shown
+// separately since, like Key Dates, they apply across grade levels rather
+// than belonging to one subject's Units/Lessons rows.
+
+function allAssessments() {
+  return currentGradeData().assessments || [];
+}
+
+function renderAssessmentsGanttRow(buckets) {
+  const items = allAssessments();
+  return renderSpanRow("Assessments", "var(--assess)", items, buckets, (a, startIdx, endIdx, lane) => `
+    <div class="lesson-chip assessment-chip span-chip" style="grid-column:${startIdx + 1} / ${endIdx + 2}; grid-row:${lane + 1}; background:var(--assess-bg);color:var(--assess)"
+      data-row="${a._row}" title="${escapeHtml(a.topic || "")}">${escapeHtml(a.topic || "")}</div>`);
+}
+
+function assessmentsForDay(day) {
+  return allAssessments().filter((a) => {
+    const start = (a.start_date || "").slice(0, 10);
+    const end = (a.end_date || start).slice(0, 10);
+    return day >= start && day <= end;
+  });
+}
+
+function openAssessmentModal(row) {
+  const a = allAssessments().find((a2) => String(a2._row) === row);
+  if (!a) return;
+  const body = $("#modal-body");
+  body.innerHTML = `<h2>Assessment</h2>
+    <div class="subject-block">
+      <div class="lesson-row" style="border-left-color:var(--assess)">
+        <div><b>${escapeHtml(a.topic || "")}</b></div>
+        <div class="lesson-meta">${formatDateRange(a.start_date, a.end_date)}</div>
+        <div style="margin-top:6px;color:var(--ink-soft)">Applies to grade levels: ${escapeHtml(a.grade_level || "All")}</div>
+        ${resourceLinkHtml(a)}
+      </div>
+    </div>`;
+  $("#unit-modal").classList.remove("hidden");
+}
+
+function renderAssessmentsList() {
+  const el = $("#assessments-panel");
+  if (!el) return;
+  const items = allAssessments().slice().sort((a, b) => (a.start_date || "").localeCompare(b.start_date || ""));
+  if (items.length === 0) { el.innerHTML = `<div class="empty-note">No assessments match the current filters.</div>`; return; }
+  el.innerHTML = `
+    <div class="legend-title">Diagnostics, benchmarks, and summative testing windows</div>
+    <div class="table-scroll"><table class="overview-table">
+      <thead><tr><th style="width:150px">Date(s)</th><th>Assessment</th></tr></thead>
+      <tbody>${items.map((a) => `
+        <tr>
+          <td class="col-label"><div class="cell-unit-label">${formatDateRange(a.start_date, a.end_date)}</div></td>
+          <td><div class="cell-topic">${escapeHtml(a.topic || "")}</div></td>
+        </tr>`).join("")}</tbody>
+    </table></div>`;
 }
 
 function renderDayAgenda() {
@@ -12513,27 +12747,51 @@ function renderDayAgenda() {
   const subjects = visibleSubjects();
   const entries = [];
   subjects.forEach((subj) => {
-    lessonsFor(subj).forEach((l) => {
+    timelineItemsFor(subj).forEach((l) => {
       if ((l.start_date || "").slice(0, 10) === day) entries.push({ subj, lesson: l });
     });
   });
+  const keyDates = keyDatesForDay(day);
+  const assessments = assessmentsForDay(day);
+  const banner = (keyDates.length || assessments.length)
+    ? `<div class="agenda-list" style="margin-bottom:14px">${keyDates.map((k) => `
+        <div class="agenda-item keydate-chip" style="border-left-color:var(--alert);background:var(--alert-bg)" data-row="${k._row}">
+          <div class="agenda-subject" style="color:var(--alert)">Key Date</div>
+          <div class="agenda-title"><b>${escapeHtml(k.topic || "")}</b></div>
+        </div>`).join("")}${assessments.map((a) => `
+        <div class="agenda-item assessment-chip" style="border-left-color:var(--assess);background:var(--assess-bg)" data-row="${a._row}">
+          <div class="agenda-subject" style="color:var(--assess)">Assessment</div>
+          <div class="agenda-title"><b>${escapeHtml(a.topic || "")}</b></div>
+        </div>`).join("")}</div>`
+    : "";
+
   if (entries.length === 0) {
-    host.innerHTML = `<div class="empty-note">No lessons logged for this day (may be a break, weekend, or not-yet-populated).</div>`;
+    host.innerHTML = banner || `<div class="empty-note">No lessons logged for this day (may be a break, weekend, or not-yet-populated).</div>`;
+    wireDayAgendaClicks();
     return;
   }
-  host.innerHTML = `<div class="agenda-list">${entries.map(({ subj, lesson }) => `
+  host.innerHTML = banner + `<div class="agenda-list">${entries.map(({ subj, lesson }) => `
     <div class="agenda-item" style="border-left-color:${languageColorDeep(subj)}" data-subj="${escapeHtml(subj)}" data-row="${lesson._row}">
       <div class="agenda-subject">${escapeHtml(subj)}</div>
       <div class="agenda-title"><b>${escapeHtml(lesson.lesson_number || "")}</b> ${escapeHtml(lesson.topic || "")}</div>
       ${lesson.lesson_objective ? `<div class="agenda-objective">${escapeHtml(lesson.lesson_objective)}</div>` : ""}
     </div>`).join("")}</div>`;
+  wireDayAgendaClicks();
+}
 
-  $$(".agenda-item").forEach((item) => {
+function wireDayAgendaClicks() {
+  $$(".agenda-item[data-subj]").forEach((item) => {
     item.addEventListener("click", () => {
       const subj = item.dataset.subj;
-      const lesson = lessonsFor(subj).find((l) => String(l._row) === item.dataset.row);
+      const lesson = timelineItemsFor(subj).find((l) => String(l._row) === item.dataset.row);
       if (lesson) openLessonModal(lesson, subj);
     });
+  });
+  $$(".agenda-item.keydate-chip").forEach((item) => {
+    item.addEventListener("click", () => openKeyDateModal(item.dataset.row));
+  });
+  $$(".agenda-item.assessment-chip").forEach((item) => {
+    item.addEventListener("click", () => openAssessmentModal(item.dataset.row));
   });
 }
 
@@ -12556,7 +12814,7 @@ function setupWeekTab() {
 function lessonsForWeek(weekIndex) {
   const bySubject = {};
   visibleSubjects().forEach((subj) => {
-    const lessons = lessonsFor(subj)
+    const lessons = timelineItemsFor(subj)
       .filter((l) => weekIndexForDate(l.start_date) === weekIndex)
       .sort((a, b) => (a.start_date || "").localeCompare(b.start_date || ""));
     if (lessons.length) bySubject[subj] = lessons;
@@ -12576,7 +12834,7 @@ function renderWeek() {
     return;
   }
   el.innerHTML = subjects.map((subj) => {
-    const rows = bySubject[subj].map((l) => `<tr>
+    const rows = bySubject[subj].map((l) => `<tr class="week-lesson-row" data-subj="${escapeHtml(subj)}" data-row="${l._row}">
       <td>${formatDate(l.start_date)}</td>
       <td>${escapeHtml(l.lesson_number || "")}</td>
       <td>${escapeHtml(l.topic || "")}</td>
@@ -12586,6 +12844,14 @@ function renderWeek() {
     <table><thead><tr><th>Date</th><th>Lesson</th><th>Topic</th><th>Objective</th></tr></thead>
     <tbody>${rows}</tbody></table>`;
   }).join("");
+
+  $$(".week-lesson-row").forEach((row) => {
+    row.addEventListener("click", () => {
+      const subj = row.dataset.subj;
+      const lesson = timelineItemsFor(subj).find((l) => String(l._row) === row.dataset.row);
+      if (lesson) openLessonModal(lesson, subj);
+    });
+  });
 }
 
 async function downloadWeekDoc() {
