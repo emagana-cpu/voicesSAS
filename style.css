@@ -1,0 +1,269 @@
+/* Palette matches the Voices Professional Learning Portal
+   (https://emagana-cpu.github.io/voicesprofessionallearning/) so this feels
+   like the same family of tools. */
+:root {
+  --ink: #1E2A32;
+  --ink-soft: #4A5A61;
+  --paper: #F7F6F1;
+  --card: #FFFFFF;
+  --line: #E1DCCE;
+  --purple: #5B1F9E;
+  --purple-deep: #3D1470;
+  --green: #7CB342;
+  --green-deep: #5C8A2E;
+  --alert: #C1442D;
+  --alert-bg: #FBE4DC;
+  --assess: #B9770E;
+  --assess-bg: #FBEBD0;
+  --focus: #3D1470;
+  --radius: 14px;
+  /* light language-allocation tints, used everywhere content is color-coded */
+  --lang-english: #C9B8EA;
+  --lang-english-deep: #5B1F9E;
+  --lang-spanish: #C5E1A5;
+  --lang-spanish-deep: #5C8A2E;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Work Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.45;
+}
+h1, h2, h3, h4 { font-family: "Fraunces", serif; font-weight: 600; }
+
+.topbar {
+  padding: 16px 20px;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.brand-row { display: flex; align-items: center; gap: 14px; }
+.brand-logo { height: 44px; width: auto; flex-shrink: 0; }
+.brand-text .eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--purple-deep); font-weight: 600; margin: 0 0 2px; }
+.brand-text h1 { margin: 0; font-size: 19px; letter-spacing: -0.01em; }
+
+.header-actions { display: flex; align-items: center; gap: 10px; }
+.btn-submit {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 600; text-decoration: none;
+  padding: 8px 14px; border-radius: 10px;
+  background: var(--green); color: var(--ink); border: 1px solid var(--green-deep);
+}
+.btn-submit:hover { background: var(--green-deep); color: white; }
+
+/* List / Timeline view toggle (merged Overview & Calendar tab) */
+.view-toggle { display: flex; gap: 4px; margin-bottom: 16px; }
+.view-btn { padding: 7px 16px; border-radius: 10px; }
+.view-btn.active { background: var(--purple); color: white; border-color: var(--purple); font-weight: 600; }
+
+/* Legend */
+.legend-toggle { position: relative; }
+.legend-toggle summary { list-style: none; cursor: pointer; font-size: 13px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink-soft); background: var(--card); }
+.legend-toggle summary::-webkit-details-marker { display: none; }
+.legend-toggle[open] summary { color: var(--purple-deep); border-color: var(--purple); }
+.legend-panel {
+  position: absolute; right: 0; top: 40px; z-index: 30;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px 16px; box-shadow: 0 10px 30px rgba(30,42,50,.14); min-width: 260px;
+}
+.legend-group { margin-bottom: 12px; }
+.legend-group:last-child { margin-bottom: 0; }
+.legend-title { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-soft); margin-bottom: 6px; font-weight: 700; }
+.legend-item { font-size: 13px; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+
+.keydates-panel { min-width: 420px; max-width: 480px; max-height: 70vh; overflow-y: auto; }
+.keydates-panel .table-scroll { border: none; }
+.keydates-panel .overview-table { min-width: 0; }
+
+/* Filter bar - deliberately loud: its own colored strip, labeled controls,
+   and a visible badge whenever a filter isn't set to "everything". */
+.filterbar {
+  display: flex; align-items: flex-end; gap: 22px; padding: 16px 20px;
+  background: linear-gradient(180deg, #F1EAFB, #FFFFFF); border-bottom: 2px solid var(--purple);
+  flex-wrap: wrap;
+}
+.filterbar-label {
+  font-family: "Fraunces", serif; font-weight: 600; font-size: 15px; color: var(--purple-deep);
+  padding-bottom: 9px; flex-shrink: 0;
+}
+.filter-slot { display: flex; flex-direction: column; gap: 5px; }
+.filter-caption {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--purple-deep);
+}
+.filter-dropdown { position: relative; }
+.filter-dropdown summary {
+  list-style: none; cursor: pointer; font-size: 13.5px; font-weight: 600; padding: 10px 16px;
+  border: 2px solid var(--purple); border-radius: 10px; color: var(--purple-deep); background: var(--card);
+  display: flex; align-items: center; gap: 8px; min-width: 170px; justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(91,31,158,.12);
+}
+.filter-dropdown summary::after { content: "▾"; font-size: 10px; opacity: .7; }
+.filter-dropdown summary::-webkit-details-marker { display: none; }
+.filter-dropdown[open] summary { background: var(--purple); color: white; }
+.filter-dropdown .filter-badge {
+  background: var(--green); color: var(--ink); font-size: 10.5px; font-weight: 700;
+  border-radius: 999px; padding: 1px 7px; margin-left: 4px;
+}
+.filter-panel {
+  position: absolute; left: 0; top: 46px; z-index: 25;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 10px 12px; box-shadow: 0 10px 30px rgba(30,42,50,.18);
+  min-width: 220px; max-height: 280px; overflow-y: auto;
+}
+.filter-actions { display: flex; gap: 6px; margin-bottom: 8px; }
+.filter-actions button { padding: 3px 10px; font-size: 11px; }
+.filter-option { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 4px 0; cursor: pointer; }
+.filter-option input { accent-color: var(--purple); width: 15px; height: 15px; }
+
+.tabs { display: flex; gap: 4px; padding: 0 20px; background: var(--card); border-bottom: 1px solid var(--line); }
+.tab-btn { border: none; background: none; padding: 12px 14px; font-size: 13px; color: var(--ink-soft); border-bottom: 2px solid transparent; cursor: pointer; font-family: inherit; }
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active { color: var(--purple-deep); border-bottom-color: var(--purple); font-weight: 600; }
+
+main { padding: 20px; max-width: 1200px; margin: 0 auto; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+.hint { font-size: 13px; color: var(--ink-soft); margin: 0 0 14px; }
+
+/* Overview: one simple, independent table per subject (no forced cross-subject alignment - see Calendar tab for that) */
+.subject-section { margin-bottom: 28px; }
+.subject-section-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.subject-section-header .lang-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.subject-section-header h3 { margin: 0; font-size: 16px; }
+.subject-section-header .subject-meta { font-size: 12px; color: var(--ink-soft); }
+
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+.overview-table { border-collapse: collapse; width: 100%; min-width: 560px; background: var(--card); font-size: 12.5px; }
+.overview-table th, .overview-table td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  vertical-align: top;
+  text-align: left;
+}
+.overview-table thead th {
+  background: var(--paper);
+  color: var(--ink-soft);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.overview-table tbody tr.unit-row { cursor: pointer; }
+.overview-table tbody tr.unit-row:hover td { background: var(--paper); }
+
+#week-content tr.week-lesson-row { cursor: pointer; }
+#week-content tr.week-lesson-row:hover td { background: var(--paper); }
+.cell-unit-label { font-weight: 700; font-size: 13px; }
+.cell-dates { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+.cell-topic { font-weight: 600; margin-bottom: 4px; }
+.cell-standards { font-size: 11.5px; color: var(--ink-soft); white-space: pre-wrap; }
+
+/* Modal */
+.modal { position: fixed; inset: 0; background: rgba(30,42,50,.45); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 50; }
+.modal.hidden { display: none; }
+.modal-card { background: var(--card); border-radius: var(--radius); max-width: 800px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 24px; position: relative; }
+.modal-close { position: absolute; top: 14px; right: 16px; border: none; background: none; font-size: 22px; cursor: pointer; color: var(--ink-soft); line-height: 1; }
+.modal-close:hover { color: var(--ink); }
+.modal-body h2 { margin-top: 0; font-size: 18px; }
+.subject-block { margin-bottom: 20px; }
+.subject-block h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 8px; font-family: "Work Sans", sans-serif; font-weight: 700; }
+.lesson-row { border-left: 3px solid var(--line); padding: 6px 10px; margin-bottom: 6px; font-size: 13px; }
+.lesson-row .lesson-meta { color: var(--ink-soft); font-size: 11px; }
+
+/* Week tab */
+.week-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.week-toolbar label { font-size: 12px; color: var(--ink-soft); display: flex; flex-direction: column; gap: 4px; }
+select, button {
+  font-family: inherit;
+  font-size: 13px; padding: 7px 12px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--card); color: var(--ink); cursor: pointer;
+}
+#download-btn { background: var(--purple); color: white; border-color: var(--purple); font-weight: 600; }
+#download-btn:hover { background: var(--purple-deep); }
+#download-btn:disabled { background: var(--line); color: var(--ink-soft); border-color: var(--line); cursor: not-allowed; }
+
+table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; }
+th, td { text-align: left; padding: 8px 10px; font-size: 13px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: var(--paper); font-size: 11px; text-transform: uppercase; color: var(--ink-soft); letter-spacing: .03em; }
+
+.empty-note { padding: 16px; border: 1.5px dashed var(--line); border-radius: var(--radius); color: var(--ink-soft); font-size: 13px; background: var(--card); }
+footer { text-align: center; font-size: 11px; color: var(--ink-soft); padding: 20px; }
+#last-updated:not(:empty)::before { content: " · "; }
+
+/* Calendar */
+.calendar-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+.zoom-group { display: flex; gap: 4px; }
+.zoom-btn { padding: 7px 14px; border-radius: 10px; }
+.zoom-btn.active { background: var(--purple); color: white; border-color: var(--purple); font-weight: 600; }
+
+/* Gantt: scrolls both ways - horizontally across time buckets, vertically
+   when a bucket has to stack many individual lessons. */
+.gantt-wrap {
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--card);
+  overflow: auto; max-height: 70vh;
+}
+.gantt-header, .gantt-row { display: flex; border-bottom: 1px solid var(--line); }
+.gantt-header { position: sticky; top: 0; background: var(--paper); z-index: 2; }
+.gantt-row:last-child { border-bottom: none; }
+.gantt-row-label {
+  flex: 0 0 150px; padding: 10px 12px; font-size: 12.5px; font-weight: 600;
+  display: flex; align-items: center; background: var(--paper);
+  position: sticky; left: 0; z-index: 1;
+}
+.gantt-header .gantt-row-label { z-index: 3; }
+.gantt-track { flex: 1; display: grid; min-height: 50px; gap: 3px; padding: 4px; }
+.gantt-col-header { font-size: 11px; color: var(--ink-soft); text-align: center; padding: 10px 4px; }
+.gantt-cell {
+  display: flex; flex-direction: column; gap: 3px; max-height: 150px; overflow-y: auto;
+  padding: 2px; border-radius: 6px;
+}
+.lesson-chip {
+  border-radius: 6px; font-size: 10.5px; padding: 3px 7px; line-height: 1.3;
+  cursor: pointer; color: var(--ink); overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; flex-shrink: 0;
+}
+.lesson-chip:hover { outline: 2px solid var(--purple-deep); outline-offset: -1px; }
+/* A lesson whose start_date/end_date differ shows up in every bucket it
+   touches (see itemOverlapsRange in app.js) - this dashed border is the
+   only visual cue that a chip continues into a neighboring cell rather
+   than being a one-off single-day lesson. */
+.lesson-chip-multiday { border: 1px dashed rgba(0,0,0,0.35); }
+.agenda-meta { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+.span-chip { align-self: center; display: flex; align-items: center; margin: 2px 0; }
+.gantt-track-span { align-items: start; }
+
+/* Curriculum Sites */
+.curricula-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.curriculum-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 18px; display: flex; flex-direction: column; gap: 8px;
+  border-top: 4px solid var(--purple);
+}
+.curriculum-card h3 { margin: 0; font-size: 16px; }
+.curriculum-card .curriculum-subjects { font-size: 12px; color: var(--ink-soft); }
+.curriculum-card .curriculum-link {
+  margin-top: 8px; align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600; text-decoration: none;
+  padding: 8px 14px; border-radius: 10px;
+  background: var(--purple); color: white;
+}
+.curriculum-card .curriculum-link:hover { background: var(--purple-deep); }
+
+.agenda-list { display: flex; flex-direction: column; gap: 8px; }
+.agenda-item {
+  background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--purple);
+  border-radius: var(--radius); padding: 10px 14px; cursor: pointer;
+}
+.agenda-item:hover { background: var(--paper); }
+.agenda-subject { font-size: 11px; text-transform: uppercase; letter-spacing: .03em; color: var(--ink-soft); font-weight: 700; }
+.agenda-title { font-size: 13.5px; margin-top: 2px; }
+.agenda-objective { font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; }
