@@ -1015,10 +1015,10 @@ async function downloadWeekDoc() {
       children.push(field("Language Objective", l.language_objective));
       children.push(field("Standards", l.focus_mastery_standards));
       children.push(blankField("Exit Ticket Exemplar"));
-      children.push(blankField("Key Misconceptions"));
+      children.push(blankField("Misconceptions (what will students struggle to understand? what check for understanding will you ask? what are the DOK levels of those questions?)"));
       children.push(blankField("Collaborative Routines for Making Learning Visible"));
       children.push(blankField("Materials Needed"));
-      children.push(blankField("Lesson Adjustment Log"));
+      children.push(blankField("Differentiation for Diverse Students (students with disabilities, 504s, etc)"));
     });
   });
 
